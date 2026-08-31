@@ -49,5 +49,6 @@ export const portfolioData = {
   coreCompetencies: [
     "Design & Analysis of Algorithms", "Time Complexity Optimization", 
     "Dynamic Programming", "Advanced Data Structures"
+    
   ]
 };

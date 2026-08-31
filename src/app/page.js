@@ -56,8 +56,13 @@ export default function Home() {
             <Terminal className="w-7 h-7" /> 
             {portfolioData.personalInfo.role}
           </h2>
-          <p className="text-gray-400 max-w-2xl text-lg md:text-xl leading-relaxed font-light">
+          <p className="text-gray-300 max-w-2xl text-lg md:text-xl leading-relaxed font-light mb-4">
             {portfolioData.personalInfo.tagline}
+          </p>
+          
+          {/* Naya About Me Section */}
+          <p className="text-gray-500 max-w-2xl text-md md:text-lg leading-relaxed font-light">
+            {portfolioData.personalInfo.about}
           </p>
         </motion.header>
 
@@ -82,20 +87,39 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ y: -8 }}
-                className="group relative bg-white/[0.02] backdrop-blur-xl border border-white/[0.05] p-8 rounded-3xl hover:border-cyan-500/30 transition-all cursor-pointer shadow-2xl"
+                className="group relative bg-white/[0.02] backdrop-blur-xl border border-white/[0.05] p-8 rounded-3xl hover:border-cyan-500/30 transition-all shadow-2xl flex flex-col"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-indigo-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-indigo-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition duration-500 pointer-events-none"></div>
                 
-                <div className="relative">
+                <div className="relative flex-1 flex flex-col">
                   <h4 className="text-2xl font-bold text-gray-100 mb-3 group-hover:text-cyan-400 transition-colors">{project.title}</h4>
-                  <p className="text-gray-400 mb-8 font-light leading-relaxed">{project.description}</p>
+                  <p className="text-gray-400 mb-6 font-light leading-relaxed">{project.description}</p>
                   
-                  <div className="flex flex-wrap gap-2 mt-auto">
+                  {/* Naye Bullet Points (Features) */}
+                  <ul className="mb-8 space-y-2 text-sm text-gray-300">
+                    {project.features.map((feature, fIndex) => (
+                      <li key={fIndex} className="flex items-center gap-2">
+                        <span className="text-cyan-400 font-bold">✓</span> {feature}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="flex flex-wrap gap-2 mt-auto mb-6">
                     {project.techStack.map((tech, i) => (
                       <span key={i} className="bg-black/30 text-indigo-300 text-xs font-mono px-3 py-1.5 rounded-lg border border-white/5">
                         {tech}
                       </span>
                     ))}
+                  </div>
+
+                  {/* Naye Live Demo aur GitHub Links */}
+                  <div className="flex gap-6 border-t border-white/5 pt-6 mt-auto">
+                    <a href={project.links.live} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-gray-300 hover:text-cyan-400 transition-colors flex items-center gap-1">
+                      Live Demo ↗
+                    </a>
+                    <a href={project.links.github} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-gray-300 hover:text-cyan-400 transition-colors flex items-center gap-1">
+                      GitHub ↗
+                    </a>
                   </div>
                 </div>
               </motion.div>
@@ -153,9 +177,19 @@ export default function Home() {
           <p className="text-gray-400 mb-10 max-w-lg mx-auto font-light text-lg">
             Currently open for new opportunities. Whether you have a question or just want to say hi, my inbox is always open.
           </p>
-          <a href="mailto:sahil@example.com" className="inline-flex items-center gap-3 bg-white text-black px-8 py-4 rounded-full font-bold hover:bg-cyan-400 hover:scale-105 transition-all duration-300 shadow-[0_0_40px_rgba(34,211,238,0.3)]">
-            <Mail className="w-5 h-5" /> Send Message
-          </a>
+          
+          {/* Naye Dynamic Contact Links */}
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+            <a href={portfolioData.personalInfo.contact.email} className="inline-flex items-center gap-3 bg-white text-black px-8 py-4 rounded-full font-bold hover:bg-cyan-400 hover:scale-105 transition-all duration-300 shadow-[0_0_40px_rgba(34,211,238,0.3)] w-full sm:w-auto justify-center">
+              <Mail className="w-5 h-5" /> Send Message
+            </a>
+            <a href={portfolioData.personalInfo.contact.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 bg-transparent border border-white/20 text-white px-8 py-4 rounded-full font-bold hover:bg-white/10 transition-all duration-300 w-full sm:w-auto justify-center">
+              GitHub
+            </a>
+            <a href={portfolioData.personalInfo.contact.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 bg-transparent border border-white/20 text-white px-8 py-4 rounded-full font-bold hover:bg-white/10 transition-all duration-300 w-full sm:w-auto justify-center">
+              LinkedIn
+            </a>
+          </div>
         </motion.section>
 
       </div>
